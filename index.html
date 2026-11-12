@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Herencia Argentina Steakhouse</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Argentine steakhouse in Coral Springs, Florida. Parrilla, empanadas and Argentine wine. Reopening November 26 under new ownership.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Figtree:wght@400;500;600&display=swap">
+<style>
+/* Layout: the dining room as a page — teal-green walls, wood-slat bands, gold lettering; photos carry the warmth */
+:root{
+  --green:#123836; --green-deep:#0b2624; --green-soft:#1a4643;
+  --wood:#7a5236; --ink:#f3efe6; --muted:#b7c6c1; --gold:#cfae6e; --line:rgba(243,239,230,.15);
+  --display:"Marcellus","Trajan Pro",Georgia,serif;
+  --serif:"Cormorant Garamond",Georgia,serif;
+  --body:"Figtree",system-ui,-apple-system,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--green);color:var(--ink);font:16px/1.65 var(--body);margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--green-deep)}
+a{color:inherit}
+img{display:block;max-width:100%;height:auto}
+.wrap{max-width:1160px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.eyebrow{font:600 12px/1 var(--body);letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0}
+h2{font-size:clamp(30px,4.6vw,46px);line-height:1.1;letter-spacing:.02em}
+p{margin:0}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+.notice{background:var(--gold);color:var(--green-deep);font:600 13px/1.4 var(--body);letter-spacing:.04em;text-align:center}
+.notice .wrap{padding-block:9px}
+
+header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(11,38,36,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
+.mark{text-decoration:none;font-family:var(--display);letter-spacing:.24em;font-size:18px;line-height:1;color:var(--gold)}
+.mark small{display:block;font:500 9px/1 var(--body);letter-spacing:.38em;color:var(--muted);margin-top:5px}
+.nav ul{display:flex;gap:26px;list-style:none;margin:0;padding:0;font-size:14px}
+.nav ul a{text-decoration:none;color:var(--muted)}
+.nav ul a:hover{color:var(--ink)}
+.nav-right{display:flex;align-items:center;gap:12px}
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.lang button{background:none;border:0;color:var(--muted);font:600 11px/1 var(--body);letter-spacing:.1em;padding:8px 10px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--green-deep)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;font:600 14px/1 var(--body);letter-spacing:.04em;padding:14px 22px;border-radius:2px;border:1px solid var(--gold);transition:background .2s,color .2s}
+.btn-solid{background:var(--gold);color:var(--green-deep)}
+.btn-solid:hover{background:#dcbf85}
+.btn-ghost{color:var(--ink);border-color:rgba(243,239,230,.4)}
+.btn-ghost:hover{border-color:var(--ink)}
+.nav .btn{padding:10px 16px;font-size:13px}
+
+/* Hero over the flames */
+.hero{position:relative;overflow:hidden;text-align:center;background:var(--green-deep)}
+.hero > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;max-width:none}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,38,36,.55) 0%,rgba(11,38,36,.7) 55%,rgba(11,38,36,.96) 100%)}
+.hero .wrap{position:relative;z-index:1;padding-block:110px 90px;display:grid;justify-items:center;gap:24px}
+.hero h1{font-size:clamp(46px,9vw,106px);line-height:.95;letter-spacing:.12em;color:var(--gold);text-shadow:0 2px 30px rgba(0,0,0,.4)}
+.hero h1 .sub{display:block;font-size:.36em;letter-spacing:.3em;margin-top:16px;color:var(--ink)}
+.hero h1 .rule{display:flex;align-items:center;justify-content:center;gap:14px;font:500 clamp(11px,1.4vw,15px)/1 var(--body);letter-spacing:.5em;margin-top:14px;color:var(--ink)}
+.hero h1 .rule::before,.hero h1 .rule::after{content:"";width:40px;height:1px;background:currentColor}
+.hero .lede{font-family:var(--serif);font-style:italic;font-size:clamp(21px,2.6vw,28px);line-height:1.4;max-width:34ch}
+.countdown{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.countdown div{min-width:78px;padding:12px 8px;border:1px solid var(--line);background:rgba(11,38,36,.7)}
+.countdown b{display:block;font:400 30px/1 var(--display);font-variant-numeric:tabular-nums}
+.countdown small{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+
+section{border-top:1px solid var(--line)}
+section > .wrap{padding-block:88px}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.split > *{min-width:0}
+.prose{display:grid;gap:18px;color:var(--muted);max-width:60ch}
+.prose strong{color:var(--ink);font-weight:500}
+.head{display:grid;gap:14px;margin-bottom:40px}
+.photo{border-radius:2px;overflow:hidden;aspect-ratio:4/3;max-width:100%}
+.photo img{width:100%;height:100%;object-fit:cover}
+.quote{font-family:var(--serif);font-size:clamp(24px,3vw,32px);line-height:1.3;color:var(--ink);border-left:2px solid var(--gold);padding-left:20px}
+.quote em{color:var(--gold)}
+
+/* Menu */
+.menu{background:var(--green-soft)}
+.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.dish{display:grid;gap:10px;align-content:start}
+.dish .photo{aspect-ratio:4/3;margin-bottom:8px}
+.dish .es{font-family:var(--serif);font-style:italic;font-size:16px;color:var(--gold)}
+.dish h3{font-size:24px;letter-spacing:.03em}
+.dish p{color:var(--muted);font-size:15px}
+.starters{margin-top:56px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0 40px;border-top:1px solid var(--line)}
+.starters div{padding:16px 0;border-bottom:1px solid var(--line);display:grid;gap:2px}
+.starters b{font-weight:500}
+.starters span{color:var(--muted);font-size:14px}
+.menu-foot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-top:32px;color:var(--muted);font-size:14px}
+
+/* Gallery: the room */
+.gallery{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:12px}
+.gallery .photo{aspect-ratio:auto;height:100%;min-height:0}
+.gallery .g1{grid-row:span 2;aspect-ratio:4/3}
+@media (max-width:900px){.gallery{grid-template-columns:1fr 1fr;grid-template-rows:auto}.gallery .g1{grid-column:span 2;grid-row:auto}.gallery .photo{aspect-ratio:4/3}}
+
+.hours{list-style:none;padding:0;margin:0;border-top:1px solid var(--line)}
+.hours li{display:flex;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+.hours li span:last-child{color:var(--muted)}
+.hours li.today,.hours li.today span:last-child{color:var(--gold)}
+.visit{display:grid;gap:22px}
+.addr{font-family:var(--serif);font-size:28px;line-height:1.25}
+.facts{display:grid;gap:10px;color:var(--muted);font-size:15px}
+.facts b{color:var(--ink);font-weight:500;display:inline-block;min-width:86px}
+
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.card{border:1px solid var(--line);display:grid;align-content:start;background:var(--green-deep)}
+.card .photo{aspect-ratio:16/9;border-radius:0}
+.card-body{padding:32px;display:grid;gap:16px}
+.card p{color:var(--muted)}
+.card .cta-row{justify-content:flex-start}
+
+footer{background:var(--green-deep);border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+footer .wrap{padding-block:48px;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:end}
+footer a{text-decoration:none}
+footer a:hover{color:var(--ink)}
+
+[data-l="es"]{display:none}
+html[lang="es"] [data-l="es"]{display:revert}
+html[lang="es"] [data-l="en"]{display:none}
+
+@media (max-width:900px){
+  .nav ul{display:none}
+  .split,.cards{grid-template-columns:1fr;gap:40px}
+  .menu-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:560px){
+  .menu-grid{grid-template-columns:1fr}
+  .nav .btn{display:none}
+  section > .wrap{padding-block:64px}
+  .hero .wrap{padding-block:80px 64px}
+  .card-body{padding:24px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div class="notice"><div class="wrap">
+  <span data-l="en">New ownership · Grand reopening Thursday, November 26</span>
+  <span data-l="es">Nuevos dueños · Gran reapertura el jueves 26 de noviembre</span>
+</div></div>
+
+<header class="nav"><div class="wrap">
+  <a class="mark" href="#top">HERENCIA<small>ARGENTINA · STEAKHOUSE</small></a>
+  <ul>
+    <li><a href="#story"><span data-l="en">Our story</span><span data-l="es">Historia</span></a></li>
+    <li><a href="#menu"><span data-l="en">Menu</span><span data-l="es">Menú</span></a></li>
+    <li><a href="#room"><span data-l="en">The room</span><span data-l="es">El salón</span></a></li>
+    <li><a href="#visit"><span data-l="en">Hours &amp; location</span><span data-l="es">Horario y ubicación</span></a></li>
+    <li><a href="#events"><span data-l="en">Events</span><span data-l="es">Eventos</span></a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang" role="group" aria-label="Language">
+      <button id="lang-en" type="button" aria-pressed="true">EN</button>
+      <button id="lang-es" type="button" aria-pressed="false">ES</button>
+    </div>
+    <a class="btn btn-solid" href="https://ig.me/m/herencia.steakhouse"><span data-l="en">Reserve</span><span data-l="es">Reservar</span></a>
+  </div>
+</div></header>
+
+<main id="top">
+<div class="hero">
+  <img src="img/hero.jpg" alt="Steaks over open flames on the parrilla" fetchpriority="high">
+  <div class="wrap">
+    <h1>HERENCIA<span class="sub">ARGENTINA</span><span class="rule">STEAKHOUSE</span></h1>
+    <p class="lede">
+      <span data-l="en">The Argentine parrilla of Coral Springs, lit again. A new chapter begins November 26.</span>
+      <span data-l="es">La parrilla argentina de Coral Springs vuelve a encenderse. Un nuevo capítulo empieza el 26 de noviembre.</span>
+    </p>
+    <div class="countdown" id="countdown" aria-live="polite">
+      <div><b id="cd-d">14</b><small data-l="en">Days</small><small data-l="es">Días</small></div>
+      <div><b id="cd-h">00</b><small data-l="en">Hours</small><small data-l="es">Horas</small></div>
+      <div><b id="cd-m">00</b><small data-l="en">Min</small><small data-l="es">Min</small></div>
+    </div>
+    <div class="cta-row">
+      <a class="btn btn-solid" href="https://ig.me/m/herencia.steakhouse"><span data-l="en">Book opening night</span><span data-l="es">Reservá la reapertura</span></a>
+      <a class="btn btn-ghost" href="https://drive.google.com/file/d/19A38Ir77I2mH-q8H8yBMHRtL38Fp3jJO/view"><span data-l="en">View the menu</span><span data-l="es">Ver el menú</span></a>
+    </div>
+  </div>
+</div>
+
+<section id="story"><div class="wrap split">
+  <div class="photo"><img src="img/mural.jpg" alt="Mural of the pampas inside the restaurant: El sabor de la Argentina, para compartir en cada encuentro" loading="lazy"></div>
+  <div class="prose">
+    <span class="eyebrow"><span data-l="en">Herencia means heritage</span><span data-l="es">Nuestra herencia</span></span>
+    <h2 style="color:var(--ink)"><span data-l="en">Same fire. New hands at the grill.</span><span data-l="es">El mismo fuego. Nuevas manos en la parrilla.</span></h2>
+    <p class="quote">El sabor de la Argentina, <em>para compartir en cada encuentro.</em></p>
+    <p data-l="en">That line is painted on our wall, and it's still the idea. Herencia reopens under <strong>new ownership</strong>: an Argentine table where the asado takes its time, the empanadas come out of the kitchen hot, and the wine is Malbec.</p>
+    <p data-l="es">Esa frase está en nuestra pared y sigue siendo la idea. Herencia reabre con <strong>nuevos dueños</strong>: una mesa argentina donde el asado se toma su tiempo, las empanadas salen calentitas de la cocina y el vino es Malbec.</p>
+    <p data-l="en">Come by on November 26, say hello, and tell us what you'd like to see on the table.</p>
+    <p data-l="es">Vení el 26 de noviembre, saludanos y contanos qué te gustaría encontrar en la mesa.</p>
+  </div>
+</div></section>
+
+<section id="menu" class="menu"><div class="wrap">
+  <div class="head">
+    <span class="eyebrow"><span data-l="en">From the parrilla</span><span data-l="es">De la parrilla</span></span>
+    <h2><span data-l="en">Cut, salted, grilled over fire</span><span data-l="es">Cortado, salado y a las brasas</span></h2>
+  </div>
+  <div class="menu-grid">
+    <div class="dish">
+      <div class="photo"><img src="img/grill.jpg" alt="Salted skirt steak on the grill" loading="lazy"></div>
+      <span class="es">Entraña</span><h3 data-l="en">Skirt steak</h3><h3 data-l="es">Entraña</h3>
+      <p data-l="en">Coarse salt, a hot grill and nothing else. The Argentine favorite.</p>
+      <p data-l="es">Sal gruesa, parrilla bien caliente y nada más. La favorita de los argentinos.</p>
+    </div>
+    <div class="dish">
+      <div class="photo"><img src="img/steak.jpg" alt="Grilled steak sliced to show a pink center" loading="lazy"></div>
+      <span class="es">Cortes a la parrilla</span><h3 data-l="en">Grilled cuts</h3><h3 data-l="es">Cortes a la parrilla</h3>
+      <p data-l="en">Charred outside, cooked to your point inside, served with chimichurri.</p>
+      <p data-l="es">Dorado por fuera, a tu punto por dentro, con chimichurri.</p>
+    </div>
+    <div class="dish">
+      <div class="photo"><img src="img/skewers.jpg" alt="Sliced steak with rosemary on picks, ready to share" loading="lazy"></div>
+      <span class="es">Para compartir</span><h3 data-l="en">To share</h3><h3 data-l="es">Para compartir</h3>
+      <p data-l="en">Sliced steak on picks for the table, the way an asado starts.</p>
+      <p data-l="es">Carne en pinchos para el centro de la mesa, como arranca un asado.</p>
+    </div>
+  </div>
+  <div class="starters">
+    <div><b>Empanadas</b><span data-l="en">Beef, chicken, ham &amp; cheese or spinach. Fried or baked.</span><span data-l="es">Carne, pollo, jamón y queso o espinaca. Fritas o al horno.</span></div>
+    <div><b>Chorizo &amp; Morcilla</b><span data-l="en">Traditional Argentine sausage and blood sausage.</span><span data-l="es">Chorizo y morcilla tradicional a la parrilla.</span></div>
+    <div><b>Mollejas</b><span data-l="en">Grilled sweetbreads, browned and crispy.</span><span data-l="es">Mollejas a la parrilla, doradas y crocantes.</span></div>
+    <div><b>Provoleta</b><span data-l="en">Grilled provolone. Add arugula or prosciutto.</span><span data-l="es">Provolone a la parrilla. Con rúcula o prosciutto.</span></div>
+  </div>
+  <div class="menu-foot">
+    <span data-l="en">A preview. The full menu and prices are in the PDF.</span>
+    <span data-l="es">Un adelanto. El menú completo con precios está en el PDF.</span>
+    <a class="btn btn-ghost" href="https://drive.google.com/file/d/19A38Ir77I2mH-q8H8yBMHRtL38Fp3jJO/view"><span data-l="en">Full menu</span><span data-l="es">Menú completo</span></a>
+  </div>
+</div></section>
+
+<section id="room"><div class="wrap">
+  <div class="head">
+    <span class="eyebrow"><span data-l="en">The room</span><span data-l="es">El salón</span></span>
+    <h2><span data-l="en">Green velvet, wood and warm light</span><span data-l="es">Terciopelo verde, madera y luz cálida</span></h2>
+  </div>
+  <div class="gallery">
+    <div class="photo g1"><img src="img/dining.jpg" alt="Dining room with green velvet chairs and the Herencia Argentina sign on wood slats" loading="lazy"></div>
+    <div class="photo"><img src="img/logo.jpg" alt="Gold Herencia Argentina monogram on a wood wall" loading="lazy"></div>
+    <div class="photo"><img src="img/flag.jpg" alt="Argentine flag under a pendant bulb" loading="lazy"></div>
+    <div class="photo"><img src="img/interior.jpg" alt="Bar area and booths by the window" loading="lazy"></div>
+    <div class="photo"><img src="img/pendants.jpg" alt="Gold ring pendant lights over the sign" loading="lazy"></div>
+  </div>
+</div></section>
+
+<section id="visit"><div class="wrap split">
+  <div>
+    <div class="head">
+      <span class="eyebrow"><span data-l="en">Hours</span><span data-l="es">Horario</span></span>
+      <h2><span data-l="en">When the grill is lit</span><span data-l="es">Cuando la parrilla está encendida</span></h2>
+    </div>
+    <ul class="hours" id="hours">
+      <li data-days="0,1,2,3,4,5,6"><span><span data-l="en">Every day</span><span data-l="es">Todos los días</span></span><span>11 AM – 11 PM</span></li>
+    </ul>
+  </div>
+  <div class="visit">
+    <div class="photo"><img src="img/storefront.jpg" alt="Herencia Argentina storefront with striped awning at 4372 N State Rd 7" loading="lazy"></div>
+    <p class="addr">4372 N State Rd 7<br>Coral Springs, FL 33073</p>
+    <div class="facts">
+      <div><b>Email</b> herenciasteakhouse@gmail.com</div>
+      <div><b>Instagram</b> <a href="https://www.instagram.com/herencia.steakhouse/">@herencia.steakhouse</a></div>
+    </div>
+    <div class="cta-row" style="justify-content:flex-start">
+      <a class="btn btn-solid" href="https://www.google.com/maps/dir/?api=1&destination=4372+N+State+Rd+7,+Coral+Springs,+FL+33073"><span data-l="en">Get directions</span><span data-l="es">Cómo llegar</span></a>
+      <a class="btn btn-ghost" href="https://ig.me/m/herencia.steakhouse"><span data-l="en">Message us</span><span data-l="es">Escribinos</span></a>
+    </div>
+  </div>
+</div></section>
+
+<section id="events"><div class="wrap">
+  <div class="cards">
+    <div class="card">
+      <div class="photo"><img src="img/serve.jpg" alt="Plate of sliced steak being carried to a table" loading="lazy"></div>
+      <div class="card-body">
+        <span class="eyebrow"><span data-l="en">Order in</span><span data-l="es">Pedí a domicilio</span></span>
+        <h2 style="font-size:32px"><span data-l="en">Asado at home</span><span data-l="es">El asado en tu casa</span></h2>
+        <p data-l="en">Order for pickup or delivery through your usual app.</p>
+        <p data-l="es">Pedí para retirar o con delivery desde tu app de siempre.</p>
+        <div class="cta-row">
+          <a class="btn btn-ghost" href="https://www.ubereats.com/search?q=Herencia%20Argentina%20Steakhouse">Uber Eats</a>
+          <a class="btn btn-ghost" href="https://www.doordash.com/search/store/Herencia%20Argentina%20Steakhouse/">DoorDash</a>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="photo"><img src="img/platter.jpg" alt="Guests picking sliced steak from a shared platter" loading="lazy"></div>
+      <div class="card-body">
+        <span class="eyebrow"><span data-l="en">Private events</span><span data-l="es">Eventos privados</span></span>
+        <h2 style="font-size:32px"><span data-l="en">Birthdays, dinners, celebrations</span><span data-l="es">Cumpleaños, cenas, celebraciones</span></h2>
+        <p data-l="en">Planning a gathering? Send us a message on Instagram or by email with your date and group size and we'll put together a menu.</p>
+        <p data-l="es">¿Organizás una reunión? Escribinos por Instagram o por email con la fecha y la cantidad de personas y armamos el menú.</p>
+        <div class="cta-row"><a class="btn btn-solid" href="https://ig.me/m/herencia.steakhouse"><span data-l="en">Plan an event</span><span data-l="es">Organizar un evento</span></a></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <div>
+    <div class="mark" style="margin-bottom:14px">HERENCIA<small>ARGENTINA · STEAKHOUSE</small></div>
+    4372 N State Rd 7, Coral Springs, FL 33073 · herenciasteakhouse@gmail.com
+  </div>
+  <div style="display:flex;gap:20px;flex-wrap:wrap">
+    <a href="https://www.instagram.com/herencia.steakhouse/">Instagram</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=Herencia+Argentina+Steakhouse+Coral+Springs"><span data-l="en">Leave a review</span><span data-l="es">Dejanos tu reseña</span></a>
+  </div>
+</div></footer>
+
+<script>
+(function(){
+  var root=document.documentElement, en=document.getElementById('lang-en'), es=document.getElementById('lang-es');
+  function setLang(l){root.lang=l;en.setAttribute('aria-pressed',l==='en');es.setAttribute('aria-pressed',l==='es');try{localStorage.setItem('herencia-lang',l)}catch(e){}}
+  en.onclick=function(){setLang('en')}; es.onclick=function(){setLang('es')};
+  var saved=null; try{saved=localStorage.getItem('herencia-lang')}catch(e){}
+  setLang(saved||((navigator.language||'').toLowerCase().indexOf('es')===0?'es':'en'));
+
+  // Countdown to Nov 26 2026, 11 AM Eastern (opening hour)
+  var target=Date.UTC(2026,10,26,16,0,0);
+  function pad(n){return String(n).padStart(2,'0')}
+  function tick(){
+    var ms=target-Date.now(), box=document.getElementById('countdown');
+    if(ms<=0){box.innerHTML='<div style="padding:14px 22px"><b style="font-size:22px"><span data-l="en">We\'re open</span><span data-l="es">Ya abrimos</span></b></div>';return}
+    document.getElementById('cd-d').textContent=Math.floor(ms/864e5);
+    document.getElementById('cd-h').textContent=pad(Math.floor(ms/36e5)%24);
+    document.getElementById('cd-m').textContent=pad(Math.floor(ms/6e4)%60);
+    setTimeout(tick,30000);
+  }
+  tick();
+
+  try{
+    var wd=new Date().toLocaleString('en-US',{timeZone:'America/New_York',weekday:'short'});
+    var idx=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].indexOf(wd);
+    document.querySelectorAll('#hours li').forEach(function(li){if(li.dataset.days.split(',').indexOf(String(idx))>-1)li.classList.add('today')});
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
