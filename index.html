@@ -138,6 +138,28 @@ html[lang="es"] [data-l="en"]{display:none}
   .card-body{padding:24px}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Reservations — compact inline form, posts to Google Form */
+#reserve > .wrap{padding-block:64px}
+.res-head{text-align:center;margin-bottom:28px}
+.res-head h2{margin-top:10px}
+.res-card{max-width:760px;margin:0 auto;background:var(--green-deep);border:1px solid var(--line);border-radius:4px;padding:24px}
+.res-grid{display:grid;grid-template-columns:1fr;gap:14px}
+.res-grid .full{grid-column:1/-1}
+.res-field label{display:block;font:600 11px/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.res-field input,.res-field select,.res-field textarea{width:100%;background:var(--green);color:var(--ink);border:1px solid rgba(243,239,230,.22);border-radius:2px;padding:11px 12px;font:15px/1.3 var(--body);color-scheme:dark}
+.res-field input:focus,.res-field select:focus,.res-field textarea:focus{outline:none;border-color:var(--gold)}
+.res-row3{display:grid;grid-template-columns:1.4fr 1fr .8fr;gap:14px 16px}
+.res-row3.res-eq{grid-template-columns:1fr 1fr 1fr}
+.res-foot{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:18px}
+.res-foot small{color:var(--muted);font-size:13px}
+.res-foot small a{color:var(--gold)}
+.res-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.res-msg{text-align:center;padding:24px 8px}
+.res-msg h3{font-size:26px;color:var(--gold);margin-bottom:8px}
+.res-msg p{color:var(--muted)}
+.res-err{color:#f0a89a;font-size:14px;margin-top:12px}
+@media (max-width:640px){.res-card{padding:20px}.res-row3,.res-row3.res-eq{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -161,7 +183,7 @@ html[lang="es"] [data-l="en"]{display:none}
       <button id="lang-en" type="button" aria-pressed="true">EN</button>
       <button id="lang-es" type="button" aria-pressed="false">ES</button>
     </div>
-    <a class="btn btn-solid" href="https://docs.google.com/forms/d/e/1FAIpQLSddYTUc4MDcHXGjFooPoqgsYd1qExQPBRkMsYSHL3Zl_6M7NA/viewform" target="_blank" rel="noopener"><span data-l="en">Reserve</span><span data-l="es">Reservar</span></a>
+    <a class="btn btn-solid" href="#reserve"><span data-l="en">Reserve</span><span data-l="es">Reservar</span></a>
   </div>
 </div></header>
 
@@ -180,11 +202,45 @@ html[lang="es"] [data-l="en"]{display:none}
       <div><b id="cd-m">00</b><small data-l="en">Min</small><small data-l="es">Min</small></div>
     </div>
     <div class="cta-row">
-      <a class="btn btn-solid" href="https://docs.google.com/forms/d/e/1FAIpQLSddYTUc4MDcHXGjFooPoqgsYd1qExQPBRkMsYSHL3Zl_6M7NA/viewform" target="_blank" rel="noopener"><span data-l="en">Book opening night</span><span data-l="es">Reservá la reapertura</span></a>
+      <a class="btn btn-solid" href="#reserve"><span data-l="en">Book opening night</span><span data-l="es">Reservá la reapertura</span></a>
       <a class="btn btn-ghost" href="https://drive.google.com/file/d/19A38Ir77I2mH-q8H8yBMHRtL38Fp3jJO/view"><span data-l="en">View the menu</span><span data-l="es">Ver el menú</span></a>
     </div>
   </div>
 </div>
+
+<section id="reserve"><div class="wrap">
+  <div class="res-head">
+    <p class="eyebrow"><span data-l="en">Reservations</span><span data-l="es">Reservas</span></p>
+    <h2><span data-l="en">Book a table</span><span data-l="es">Reservá tu mesa</span></h2>
+  </div>
+  <div class="res-card">
+    <form id="res-form" novalidate>
+      <div class="res-grid">
+        <div class="full res-row3">
+          <div class="res-field"><label for="res-date"><span data-l="en">Date</span><span data-l="es">Fecha</span></label><input id="res-date" type="date" required></div>
+          <div class="res-field"><label for="res-time"><span data-l="en">Time</span><span data-l="es">Hora</span></label><select id="res-time" required></select></div>
+          <div class="res-field"><label for="res-party"><span data-l="en">Guests</span><span data-l="es">Personas</span></label><select id="res-party" required></select></div>
+        </div>
+        <div class="full res-row3 res-eq">
+          <div class="res-field"><label for="res-name"><span data-l="en">Name</span><span data-l="es">Nombre</span></label><input id="res-name" type="text" autocomplete="name" required></div>
+          <div class="res-field"><label for="res-phone"><span data-l="en">Phone</span><span data-l="es">Teléfono</span></label><input id="res-phone" type="tel" autocomplete="tel" required></div>
+          <div class="res-field"><label for="res-email">Email <span data-l="en">(optional)</span><span data-l="es">(opcional)</span></label><input id="res-email" type="email" autocomplete="email"></div>
+        </div>
+        <div class="res-field full"><label for="res-notes"><span data-l="en">Notes — allergies, birthdays (optional)</span><span data-l="es">Notas — alergias, cumpleaños (opcional)</span></label><input id="res-notes" type="text"></div>
+        <div class="res-hp" aria-hidden="true"><input id="res-hp" type="text" tabindex="-1" autocomplete="off"></div>
+      </div>
+      <div class="res-foot">
+        <small><span data-l="en">We'll confirm your table shortly.</span><span data-l="es">Te confirmamos la mesa a la brevedad.</span></small>
+        <button class="btn btn-solid" type="submit" id="res-submit"><span data-l="en">Request booking</span><span data-l="es">Pedir reserva</span></button>
+      </div>
+      <p class="res-err" id="res-err" hidden></p>
+    </form>
+    <div class="res-msg" id="res-ok" hidden>
+      <h3><span data-l="en">Thank you!</span><span data-l="es">¡Gracias!</span></h3>
+      <p><span data-l="en">We received your request and will confirm your table shortly.</span><span data-l="es">Recibimos tu pedido y te confirmamos la mesa a la brevedad.</span></p>
+    </div>
+  </div>
+</div></section>
 
 <section id="story"><div class="wrap split">
   <div class="photo"><img src="img/mural.jpg" alt="Mural of the pampas inside the restaurant: El sabor de la Argentina, para compartir en cada encuentro" loading="lazy"></div>
@@ -341,6 +397,48 @@ html[lang="es"] [data-l="en"]{display:none}
     var idx=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].indexOf(wd);
     document.querySelectorAll('#hours li').forEach(function(li){if(li.dataset.days.split(',').indexOf(String(idx))>-1)li.classList.add('today')});
   }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  var FORM='https://docs.google.com/forms/d/e/1FAIpQLSddYTUc4MDcHXGjFooPoqgsYd1qExQPBRkMsYSHL3Zl_6M7NA/formResponse';
+  var E={name:'entry.595308941',phone:'entry.848090172',email:'entry.887531698',date:'entry.1033526850',time:'entry.2141523830',party:'entry.2033204145',notes:'entry.1683092034'};
+  var f=document.getElementById('res-form'); if(!f) return;
+  var $=function(id){return document.getElementById(id)};
+  var es=function(){return document.documentElement.lang==='es'};
+  // Date: no earlier than reopening (Nov 26, 2026) or today
+  var d=new Date(), today=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+  var min=today<'2026-11-26'?'2026-11-26':today; $('res-date').min=min; $('res-date').value=min;
+  // Time: every 30 min, 11:00 to 22:00
+  var t=$('res-time');
+  for(var h=11;h<=22;h++){for(var m=0;m<60;m+=30){if(h===22&&m>0)break;
+    var v=String(h).padStart(2,'0')+':'+String(m).padStart(2,'0');
+    var lab=((h%12)||12)+':'+String(m).padStart(2,'0')+(h<12?' AM':' PM');
+    t.add(new Option(lab,v,false,v==='19:00'));}}
+  // Party size (values must match the Google Form choices)
+  var p=$('res-party');
+  for(var n=1;n<=10;n++)p.add(new Option(String(n),String(n),false,n===2));
+  p.add(new Option('10+','Más de 10 / More than 10'));
+  f.addEventListener('submit',function(ev){
+    ev.preventDefault();
+    var err=$('res-err'); err.hidden=true;
+    if($('res-hp').value) return;
+    var name=$('res-name').value.trim(), phone=$('res-phone').value.trim(), date=$('res-date').value, email=$('res-email').value.trim();
+    if(!name||!phone||!date){err.textContent=es()?'Completá fecha, nombre y teléfono.':'Please fill in date, name and phone.';err.hidden=false;return;}
+    if(email&&!/^\S+@\S+\.\S+$/.test(email)){err.textContent=es()?'Revisá el email.':'Please check the email.';err.hidden=false;return;}
+    var ds=date.split('-'), ts=t.value.split(':'), b=new URLSearchParams();
+    b.append(E.name,name); b.append(E.phone,phone); if(email)b.append(E.email,email);
+    b.append(E.date+'_year',ds[0]); b.append(E.date+'_month',String(+ds[1])); b.append(E.date+'_day',String(+ds[2]));
+    b.append(E.time+'_hour',ts[0]); b.append(E.time+'_minute',ts[1]);
+    b.append(E.party,p.value); var notes=$('res-notes').value.trim(); if(notes)b.append(E.notes,notes);
+    var btn=$('res-submit'); btn.disabled=true; btn.style.opacity=.6;
+    fetch(FORM,{method:'POST',mode:'no-cors',body:b}).then(function(){
+      f.hidden=true; $('res-ok').hidden=false;
+    }).catch(function(){
+      btn.disabled=false; btn.style.opacity='';
+      err.textContent=es()?'No se pudo enviar. Probá de nuevo o escribinos por Instagram.':'Could not send. Please try again or message us on Instagram.'; err.hidden=false;
+    });
+  });
 })();
 </script>
 </body>
