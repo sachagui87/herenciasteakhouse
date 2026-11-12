@@ -224,7 +224,7 @@ html[lang="es"] [data-l="en"]{display:none}
         <div class="full res-row3 res-eq">
           <div class="res-field"><label for="res-name"><span data-l="en">Name</span><span data-l="es">Nombre</span></label><input id="res-name" type="text" autocomplete="name" required></div>
           <div class="res-field"><label for="res-phone"><span data-l="en">Phone</span><span data-l="es">Teléfono</span></label><input id="res-phone" type="tel" autocomplete="tel" required></div>
-          <div class="res-field"><label for="res-email">Email <span data-l="en">(optional)</span><span data-l="es">(opcional)</span></label><input id="res-email" type="email" autocomplete="email"></div>
+          <div class="res-field"><label for="res-email">Email</label><input id="res-email" type="email" autocomplete="email" required></div>
         </div>
         <div class="res-field full"><label for="res-notes"><span data-l="en">Notes — allergies, birthdays (optional)</span><span data-l="es">Notas — alergias, cumpleaños (opcional)</span></label><input id="res-notes" type="text"></div>
         <div class="res-hp" aria-hidden="true"><input id="res-hp" type="text" tabindex="-1" autocomplete="off"></div>
@@ -424,8 +424,8 @@ html[lang="es"] [data-l="en"]{display:none}
     var err=$('res-err'); err.hidden=true;
     if($('res-hp').value) return;
     var name=$('res-name').value.trim(), phone=$('res-phone').value.trim(), date=$('res-date').value, email=$('res-email').value.trim();
-    if(!name||!phone||!date){err.textContent=es()?'Completá fecha, nombre y teléfono.':'Please fill in date, name and phone.';err.hidden=false;return;}
-    if(email&&!/^\S+@\S+\.\S+$/.test(email)){err.textContent=es()?'Revisá el email.':'Please check the email.';err.hidden=false;return;}
+    if(!name||!phone||!date||!email){err.textContent=es()?'Completá fecha, nombre, teléfono y email.':'Please fill in date, name, phone and email.';err.hidden=false;return;}
+    if(!/^\S+@\S+\.\S+$/.test(email)){err.textContent=es()?'Revisá el email.':'Please check the email.';err.hidden=false;return;}
     var ds=date.split('-'), ts=t.value.split(':'), b=new URLSearchParams();
     b.append(E.name,name); b.append(E.phone,phone); if(email)b.append(E.email,email);
     b.append(E.date+'_year',ds[0]); b.append(E.date+'_month',String(+ds[1])); b.append(E.date+'_day',String(+ds[2]));
