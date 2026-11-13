@@ -118,6 +118,13 @@ html:not(.js-menu) .mtabs{display:none}
 .mnote{margin:16px 0 0;color:var(--muted);font-size:14px;font-style:italic}
 @media (max-width:700px){.mlist{grid-template-columns:1fr}.mlist.mlist-compact{grid-template-columns:1fr 1fr;gap:0 20px}.mlist-compact .mname b{font-size:15px}.mtabs{margin-top:48px}}
 
+/* Event request form */
+.ev-mail{color:var(--muted);font-size:14px}
+.ev-mail a{color:var(--ink)}
+.res-card.ev-card{max-width:none;margin-top:24px;scroll-margin-top:96px}
+.js-ev .ev-card:not(.open){display:none}
+.ev-title{font-size:26px;color:var(--gold);margin:0 0 20px}
+.ev-card textarea{resize:vertical}
 /* Gallery: the room */
 .gallery{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:12px}
 .gallery .photo{aspect-ratio:auto;height:100%;min-height:0}
@@ -500,10 +507,45 @@ html[lang="es"] [data-l="en"]{display:none}
       <div class="card-body">
         <span class="eyebrow"><span data-l="en">Private events</span><span data-l="es">Eventos privados</span></span>
         <h2 style="font-size:32px"><span data-l="en">Birthdays, dinners, celebrations</span><span data-l="es">Cumpleaños, cenas, celebraciones</span></h2>
-        <p data-l="en">Planning a gathering? Send us a message on Instagram or by email with your date and group size and we'll put together a menu.</p>
-        <p data-l="es">¿Organizás una reunión? Escribinos por Instagram o por email con la fecha y la cantidad de personas y armamos el menú.</p>
-        <div class="cta-row"><a class="btn btn-solid" href="https://ig.me/m/herencia.steakhouse"><span data-l="en">Plan an event</span><span data-l="es">Organizar un evento</span></a></div>
+        <p data-l="en">Planning a gathering? Tell us the date and group size and we'll put together a menu for you.</p>
+        <p data-l="es">¿Organizás una reunión? Contanos la fecha y la cantidad de personas y armamos el menú para vos.</p>
+        <div class="cta-row"><a class="btn btn-solid" id="ev-open" href="#ev-panel" aria-controls="ev-panel" aria-expanded="false"><span data-l="en">Plan an event</span><span data-l="es">Organizar un evento</span></a></div>
+        <small class="ev-mail"><span data-l="en">Or write to</span><span data-l="es">O escribinos a</span> <a href="mailto:events@herenciasteakhouse.com">events@herenciasteakhouse.com</a></small>
       </div>
+    </div>
+  </div>
+  <div class="res-card ev-card" id="ev-panel">
+    <form id="ev-form" novalidate>
+      <h3 class="ev-title"><span data-l="en">Tell us about your event</span><span data-l="es">Contanos sobre tu evento</span></h3>
+      <div class="res-grid">
+        <div class="full res-row3 res-eq">
+          <div class="res-field"><label for="ev-type"><span data-l="en">Occasion</span><span data-l="es">Tipo de evento</span></label><select id="ev-type">
+            <option value="Cumpleaños / Birthday" data-en="Birthday">Cumpleaños</option>
+            <option value="Cena de empresa / Corporate dinner" data-en="Corporate dinner">Cena de empresa</option>
+            <option value="Aniversario / Anniversary" data-en="Anniversary">Aniversario</option>
+            <option value="Reunión familiar / Family gathering" data-en="Family gathering">Reunión familiar</option>
+            <option value="Otro / Other" data-en="Other">Otro</option>
+          </select></div>
+          <div class="res-field"><label for="ev-date"><span data-l="en">Date</span><span data-l="es">Fecha</span></label><input id="ev-date" type="date" required></div>
+          <div class="res-field"><label for="ev-guests"><span data-l="en">Guests</span><span data-l="es">Personas</span></label><input id="ev-guests" type="number" min="1" inputmode="numeric" required></div>
+        </div>
+        <div class="full res-row3 res-eq">
+          <div class="res-field"><label for="ev-name"><span data-l="en">Name</span><span data-l="es">Nombre</span></label><input id="ev-name" type="text" autocomplete="name" required></div>
+          <div class="res-field"><label for="ev-phone"><span data-l="en">Phone</span><span data-l="es">Teléfono</span></label><input id="ev-phone" type="tel" autocomplete="tel" required></div>
+          <div class="res-field"><label for="ev-email">Email</label><input id="ev-email" type="email" autocomplete="email" required></div>
+        </div>
+        <div class="res-field full"><label for="ev-msg"><span data-l="en">Anything else? Time, budget, menu ideas (optional)</span><span data-l="es">¿Algo más? Horario, presupuesto, ideas para el menú (opcional)</span></label><textarea id="ev-msg" rows="4"></textarea></div>
+        <div class="res-hp" aria-hidden="true"><input id="ev-hp" type="text" tabindex="-1" autocomplete="off"></div>
+      </div>
+      <div class="res-foot">
+        <small><span data-l="en">We'll reply by email within a day.</span><span data-l="es">Te respondemos por email en el día.</span></small>
+        <button class="btn btn-solid" type="submit" id="ev-submit"><span data-l="en">Send request</span><span data-l="es">Enviar consulta</span></button>
+      </div>
+      <p class="res-err" id="ev-err" hidden></p>
+    </form>
+    <div class="res-msg" id="ev-ok" hidden>
+      <h3><span data-l="en">Thank you!</span><span data-l="es">¡Gracias!</span></h3>
+      <p><span data-l="en">We received your request and will get back to you by email soon.</span><span data-l="es">Recibimos tu consulta y te respondemos por email a la brevedad.</span></p>
     </div>
   </div>
 </div></section>
@@ -600,6 +642,48 @@ html[lang="es"] [data-l="en"]{display:none}
     b.addEventListener('keydown',function(e){var k=e.key,j=k==='ArrowRight'?i+1:k==='ArrowLeft'?i-1:-9;if(j===-9)return;e.preventDefault();show(tabs[(j+tabs.length)%tabs.length],true);});
   });
   show(tabs[0]);
+})();
+</script>
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)}, f=$('ev-form'), panel=$('ev-panel'), open=$('ev-open'); if(!f) return;
+  var es=function(){return document.documentElement.lang==='es'};
+  document.documentElement.classList.add('js-ev');
+  open.addEventListener('click',function(e){
+    e.preventDefault(); var on=!panel.classList.contains('open');
+    panel.classList.toggle('open',on); open.setAttribute('aria-expanded',on);
+    if(on){panel.scrollIntoView({behavior:'smooth',block:'start'}); setTimeout(function(){$('ev-type').focus({preventScroll:true})},400);}
+  });
+  var d=new Date(), today=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+  $('ev-date').min=today<'2026-11-26'?'2026-11-26':today;
+  // Occasion labels follow the EN/ES toggle
+  function lab(){[].forEach.call($('ev-type').options,function(o){if(!o.dataset.es)o.dataset.es=o.textContent;o.textContent=es()?o.dataset.es:o.dataset.en;});}
+  lab(); new MutationObserver(lab).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+  f.addEventListener('submit',function(ev){
+    ev.preventDefault();
+    var err=$('ev-err'); err.hidden=true;
+    if($('ev-hp').value) return;
+    var v={name:$('ev-name').value.trim(),phone:$('ev-phone').value.trim(),email:$('ev-email').value.trim(),date:$('ev-date').value,guests:$('ev-guests').value.trim(),type:$('ev-type').value,msg:$('ev-msg').value.trim()};
+    if(!v.name||!v.phone||!v.email||!v.date||!v.guests){err.textContent=es()?'Completá fecha, personas, nombre, teléfono y email.':'Please fill in date, guests, name, phone and email.';err.hidden=false;return;}
+    if(!/^\S+@\S+\.\S+$/.test(v.email)){err.textContent=es()?'Revisá el email.':'Please check the email.';err.hidden=false;return;}
+    var ds=v.date.split('-'), nice=ds[1]+'/'+ds[2]+'/'+ds[0];
+    var body={
+      _subject:'Evento: '+v.type.split(' / ')[0]+' · '+nice+' · '+v.guests+' personas',
+      _template:'table', _captcha:'false', _replyto:v.email,
+      'Tipo de evento':v.type, 'Fecha':nice, 'Personas':v.guests,
+      'Nombre':v.name, 'Teléfono':v.phone, 'email':v.email,
+      'Mensaje':v.msg||'—', 'Idioma':es()?'Español':'English'
+    };
+    var btn=$('ev-submit'); btn.disabled=true; btn.style.opacity=.6;
+    fetch('https://formsubmit.co/ajax/events@herenciasteakhouse.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(body)})
+      .then(function(r){return r.json()}).then(function(j){
+        if(String(j.success)!=='true') throw new Error(j.message||'failed');
+        f.hidden=true; $('ev-ok').hidden=false;
+      }).catch(function(){
+        btn.disabled=false; btn.style.opacity='';
+        err.innerHTML=es()?'No se pudo enviar. Probá de nuevo o escribinos a <a href="mailto:events@herenciasteakhouse.com">events@herenciasteakhouse.com</a>.':'Could not send. Please try again or email <a href="mailto:events@herenciasteakhouse.com">events@herenciasteakhouse.com</a>.'; err.hidden=false;
+      });
+  });
 })();
 </script>
 </body>
