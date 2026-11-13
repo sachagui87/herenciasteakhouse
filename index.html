@@ -94,6 +94,30 @@ section > .wrap{padding-block:88px}
 .starters span{color:var(--muted);font-size:14px}
 .menu-foot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-top:32px;color:var(--muted);font-size:14px}
 
+/* Full menu */
+.mtabs{display:flex;flex-wrap:wrap;gap:8px;margin-top:64px;padding-bottom:20px;border-bottom:1px solid var(--line)}
+.mtabs button{background:none;border:1px solid var(--line);border-radius:999px;color:var(--muted);font:600 13px/1 var(--body);letter-spacing:.04em;padding:10px 16px;cursor:pointer}
+.mtabs button:hover{color:var(--ink);border-color:rgba(243,239,230,.4)}
+.mtabs button[aria-selected="true"]{background:var(--gold);border-color:var(--gold);color:var(--green-deep)}
+.mpanels{padding-top:8px}
+.mpanel-title{display:none;font-size:26px;color:var(--gold);margin:40px 0 4px}
+.js-menu .mpanel[hidden]{display:none}
+html:not(.js-menu) .mpanel-title{display:block}
+html:not(.js-menu) .mtabs{display:none}
+.mgroup{margin-top:28px}
+.mgroup h4{font:600 12px/1 var(--body);letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin:0 0 4px}
+.mlist{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:0 48px}
+.mlist li{padding:16px 0;border-bottom:1px solid var(--line);display:grid;gap:4px;align-content:start}
+.mlist p{margin:0;color:var(--muted);font-size:15px;line-height:1.5}
+.mname{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.mname b{font-family:var(--serif);font-weight:500;font-size:20px;color:var(--ink)}
+.msize{color:var(--gold);font-size:13px;letter-spacing:.06em;white-space:nowrap}
+.mlist-compact{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+.mlist-compact li{padding:12px 0}
+.mlist-compact .mname b{font-family:var(--body);font-size:16px}
+.mnote{margin:16px 0 0;color:var(--muted);font-size:14px;font-style:italic}
+@media (max-width:700px){.mlist{grid-template-columns:1fr}.mlist.mlist-compact{grid-template-columns:1fr 1fr;gap:0 20px}.mlist-compact .mname b{font-size:15px}.mtabs{margin-top:48px}}
+
 /* Gallery: the room */
 .gallery{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:12px}
 .gallery .photo{aspect-ratio:auto;height:100%;min-height:0}
@@ -203,7 +227,7 @@ html[lang="es"] [data-l="en"]{display:none}
     </div>
     <div class="cta-row">
       <a class="btn btn-solid" href="#reserve"><span data-l="en">Book opening night</span><span data-l="es">Reservá la reapertura</span></a>
-      <a class="btn btn-ghost" href="https://drive.google.com/file/d/19A38Ir77I2mH-q8H8yBMHRtL38Fp3jJO/view"><span data-l="en">View the menu</span><span data-l="es">Ver el menú</span></a>
+      <a class="btn btn-ghost" href="#menu"><span data-l="en">View the menu</span><span data-l="es">Ver el menú</span></a>
     </div>
   </div>
 </div>
@@ -257,39 +281,163 @@ html[lang="es"] [data-l="en"]{display:none}
 
 <section id="menu" class="menu"><div class="wrap">
   <div class="head">
-    <span class="eyebrow"><span data-l="en">From the parrilla</span><span data-l="es">De la parrilla</span></span>
+    <span class="eyebrow"><span data-l="en">The menu</span><span data-l="es">La carta</span></span>
     <h2><span data-l="en">Cut, salted, grilled over fire</span><span data-l="es">Cortado, salado y a las brasas</span></h2>
   </div>
   <div class="menu-grid">
     <div class="dish">
       <div class="photo"><img src="img/grill.jpg" alt="Salted skirt steak on the grill" loading="lazy"></div>
       <span class="es">Entraña</span><h3 data-l="en">Skirt steak</h3><h3 data-l="es">Entraña</h3>
-      <p data-l="en">Coarse salt, a hot grill and nothing else. The Argentine favorite.</p>
-      <p data-l="es">Sal gruesa, parrilla bien caliente y nada más. La favorita de los argentinos.</p>
+      <p data-l="en">Twelve ounces on a hot grill, with house-made chimichurri. The Argentine favorite.</p>
+      <p data-l="es">Doce onzas a la parrilla bien caliente, con chimichurri casero. La favorita de los argentinos.</p>
     </div>
     <div class="dish">
       <div class="photo"><img src="img/steak.jpg" alt="Grilled steak sliced to show a pink center" loading="lazy"></div>
-      <span class="es">Cortes a la parrilla</span><h3 data-l="en">Grilled cuts</h3><h3 data-l="es">Cortes a la parrilla</h3>
-      <p data-l="en">Charred outside, cooked to your point inside, served with chimichurri.</p>
-      <p data-l="es">Dorado por fuera, a tu punto por dentro, con chimichurri.</p>
+      <span class="es">Cortes a la parrilla</span><h3 data-l="en">Steaks</h3><h3 data-l="es">Cortes</h3>
+      <p data-l="en">Ribeye, New York strip, filet mignon, picanha and asado de tira, cooked to order.</p>
+      <p data-l="es">Ojo de bife, bife de chorizo, lomo, picanha y asado de tira, hechos al momento.</p>
     </div>
     <div class="dish">
       <div class="photo"><img src="img/skewers.jpg" alt="Sliced steak with rosemary on picks, ready to share" loading="lazy"></div>
-      <span class="es">Para compartir</span><h3 data-l="en">To share</h3><h3 data-l="es">Para compartir</h3>
-      <p data-l="en">Sliced steak on picks for the table, the way an asado starts.</p>
-      <p data-l="es">Carne en pinchos para el centro de la mesa, como arranca un asado.</p>
+      <span class="es">Para compartir</span><h3 data-l="en">Mixed grill for two</h3><h3 data-l="es">Parrillada para dos</h3>
+      <p data-l="en">Beef cuts, chorizo, morcilla, sweetbreads and provoleta for the middle of the table.</p>
+      <p data-l="es">Cortes, chorizo, morcilla, mollejas y provoleta para el centro de la mesa.</p>
     </div>
   </div>
-  <div class="starters">
-    <div><b>Empanadas</b><span data-l="en">Beef, chicken, ham &amp; cheese or spinach. Fried or baked.</span><span data-l="es">Carne, pollo, jamón y queso o espinaca. Fritas o al horno.</span></div>
-    <div><b>Chorizo &amp; Morcilla</b><span data-l="en">Traditional Argentine sausage and blood sausage.</span><span data-l="es">Chorizo y morcilla tradicional a la parrilla.</span></div>
-    <div><b>Mollejas</b><span data-l="en">Grilled sweetbreads, browned and crispy.</span><span data-l="es">Mollejas a la parrilla, doradas y crocantes.</span></div>
-    <div><b>Provoleta</b><span data-l="en">Grilled provolone. Add arugula or prosciutto.</span><span data-l="es">Provolone a la parrilla. Con rúcula o prosciutto.</span></div>
+  <div class="mtabs" role="tablist" aria-label="Menu sections">
+    <button type="button" role="tab" id="mt-grill" aria-controls="mp-grill" aria-selected="true"><span data-l="en">From the grill</span><span data-l="es">Parrilla</span></button><button type="button" role="tab" id="mt-starters" aria-controls="mp-starters" aria-selected="false"><span data-l="en">Appetizers</span><span data-l="es">Entradas</span></button><button type="button" role="tab" id="mt-salads" aria-controls="mp-salads" aria-selected="false"><span data-l="en">Salads</span><span data-l="es">Ensaladas</span></button><button type="button" role="tab" id="mt-pastas" aria-controls="mp-pastas" aria-selected="false"><span data-l="en">Pastas</span><span data-l="es">Pastas</span></button><button type="button" role="tab" id="mt-milanesas" aria-controls="mp-milanesas" aria-selected="false"><span data-l="en">Milanesas</span><span data-l="es">Milanesas</span></button><button type="button" role="tab" id="mt-sandwiches" aria-controls="mp-sandwiches" aria-selected="false"><span data-l="en">Sandwiches</span><span data-l="es">Sándwiches</span></button><button type="button" role="tab" id="mt-sides" aria-controls="mp-sides" aria-selected="false"><span data-l="en">Sides &amp; kids</span><span data-l="es">Guarniciones y niños</span></button><button type="button" role="tab" id="mt-desserts" aria-controls="mp-desserts" aria-selected="false"><span data-l="en">Desserts</span><span data-l="es">Postres</span></button>
+  </div>
+  <div class="mpanels">
+<div class="mpanel" role="tabpanel" id="mp-grill" aria-labelledby="mt-grill">
+<h3 class="mpanel-title"><span><span data-l="en">From the grill</span><span data-l="es">Parrilla</span></span></h3>
+<div class="mgroup">
+<h4><span data-l="en">Individual cuts</span><span data-l="es">Cortes individuales</span></h4>
+<ul class="mlist">
+<li><div class="mname"><b><span data-l="en">Filet Mignon</span><span data-l="es">Lomo</span></b><small class="msize">8 oz</small></div><p data-l="en">Center-cut beef tenderloin with roasted garlic and Malbec reduction.</p><p data-l="es">Centro de lomo con ajo asado y reducción de Malbec.</p></li>
+<li><div class="mname"><b><span data-l="en">Ribeye</span><span data-l="es">Ojo de bife</span></b><small class="msize">16 oz</small></div><p data-l="en">Rich and juicy ribeye finished with rosemary butter and smoked sea salt.</p><p data-l="es">Ojo de bife jugoso, terminado con manteca de romero y sal marina ahumada.</p></li>
+<li><div class="mname"><b><span data-l="en">New York Strip</span><span data-l="es">Bife de chorizo</span></b><small class="msize">14 oz</small></div><p data-l="en">Grilled strip steak with house-made chimichurri and roasted garlic.</p><p data-l="es">Bife de chorizo a la parrilla con chimichurri casero y ajo asado.</p></li>
+<li><div class="mname"><b><span data-l="en">Flap Steak</span><span data-l="es">Vacío</span></b><small class="msize">12 oz</small></div><p data-l="en">Whole grilled flap steak finished with chimichurri and fresh herbs.</p><p data-l="es">Vacío entero a la parrilla, terminado con chimichurri y hierbas frescas.</p></li>
+</ul>
+</div>
+<div class="mgroup">
+<h4><span data-l="en">Argentine favorites</span><span data-l="es">Clásicos argentinos</span></h4>
+<ul class="mlist">
+<li><div class="mname"><b><span data-l="en">Short Ribs / Asado de Tira</span><span data-l="es">Asado de tira</span></b><small class="msize">16 oz</small></div><p data-l="en">Cross-cut beef ribs served with chimichurri and charred lemon.</p><p data-l="es">Costillar en corte transversal con chimichurri y limón grillado.</p></li>
+<li><div class="mname"><b>Picanha</b><small class="msize">12 oz</small></div><p data-l="en">Grilled top sirloin cap served with roasted onions and peppers.</p><p data-l="es">Tapa de cuadril a la parrilla con cebollas y morrones asados.</p></li>
+<li><div class="mname"><b><span data-l="en">Skirt Steak / Entraña</span><span data-l="es">Entraña</span></b><small class="msize">12 oz</small></div><p data-l="en">Grilled skirt steak served with house-made chimichurri.</p><p data-l="es">Entraña a la parrilla con chimichurri casero.</p></li>
+<li><div class="mname"><b><span data-l="en">Argentine Mixed Grill for Two</span><span data-l="es">Parrillada argentina para dos</span></b><small class="msize">32 oz</small></div><p data-l="en">A selection of beef cuts, chorizo, morcilla, sweetbreads, and provoleta.</p><p data-l="es">Selección de cortes, chorizo, morcilla, mollejas y provoleta.</p></li>
+</ul>
+<p class="mnote"><span data-l="en">All grill selections are prepared to order and served with your choice of one side.</span><span data-l="es">Todos los cortes se hacen al momento y vienen con una guarnición a elección.</span></p>
+</div>
+</div>
+<div class="mpanel" role="tabpanel" id="mp-starters" aria-labelledby="mt-starters">
+<h3 class="mpanel-title"><span><span data-l="en">Appetizers</span><span data-l="es">Entradas</span></span></h3>
+<div class="mgroup">
+<ul class="mlist">
+<li><div class="mname"><b><span data-l="en">Argentine Empanadas</span><span data-l="es">Empanadas argentinas</span></b></div><p data-l="en">Choice of beef, caprese, or onion and cheese. Served with chimichurri.</p><p data-l="es">De carne, caprese o cebolla y queso. Con chimichurri.</p></li>
+<li><div class="mname"><b><span data-l="en">Carpaccio di Manzo</span><span data-l="es">Carpaccio di manzo</span></b></div><p data-l="en">Thinly sliced eye of round, arugula, shaved Parmesan, lemon, truffle oil, and black pepper.</p><p data-l="es">Peceto en láminas finas, rúcula, lascas de parmesano, limón, aceite de trufa y pimienta negra.</p></li>
+<li><div class="mname"><b><span data-l="en">Argentine Chorizo</span><span data-l="es">Chorizo argentino</span></b></div><p data-l="en">Grilled Argentine sausage served with house-made chimichurri.</p><p data-l="es">Chorizo a la parrilla con chimichurri casero.</p></li>
+<li><div class="mname"><b>Morcilla</b></div><p data-l="en">Grilled Argentine blood sausage served with chimichurri.</p><p data-l="es">Morcilla argentina a la parrilla con chimichurri.</p></li>
+<li><div class="mname"><b><span data-l="en">Classic Provoleta</span><span data-l="es">Provoleta clásica</span></b></div><p data-l="en">Smoked provolone grilled with oregano and chimichurri.</p><p data-l="es">Provolone ahumado a la parrilla con orégano y chimichurri.</p></li>
+<li><div class="mname"><b><span data-l="en">Prosciutto Provoleta</span><span data-l="es">Provoleta con prosciutto</span></b></div><p data-l="en">Grilled smoked provolone topped with prosciutto and arugula.</p><p data-l="es">Provolone ahumado a la parrilla con prosciutto y rúcula.</p></li>
+<li><div class="mname"><b><span data-l="en">Sun-Dried Tomato Provoleta</span><span data-l="es">Provoleta con tomates secos</span></b></div><p data-l="en">Grilled smoked provolone with sun-dried tomatoes and fresh herbs.</p><p data-l="es">Provolone ahumado a la parrilla con tomates secos y hierbas frescas.</p></li>
+<li><div class="mname"><b><span data-l="en">Argentine Tasting Board</span><span data-l="es">Tabla argentina</span></b></div><p data-l="en">Chorizo, morcilla, provoleta, and one empanada of your choice.</p><p data-l="es">Chorizo, morcilla, provoleta y una empanada a elección.</p></li>
+<li><div class="mname"><b><span data-l="en">Country-Style Bruschetta</span><span data-l="es">Bruschetta de campo</span></b></div><p data-l="en">Toasted country bread with tomatoes, anchovies, garlic, basil, and extra-virgin olive oil.</p><p data-l="es">Pan de campo tostado con tomate, anchoas, ajo, albahaca y aceite de oliva extra virgen.</p></li>
+<li><div class="mname"><b><span data-l="en">Fried Calamari</span><span data-l="es">Rabas</span></b></div><p data-l="en">Crispy breaded calamari served with fresh lemon and house-made aioli.</p><p data-l="es">Calamares rebozados y crocantes con limón y alioli casero.</p></li>
+</ul>
+</div>
+</div>
+<div class="mpanel" role="tabpanel" id="mp-salads" aria-labelledby="mt-salads">
+<h3 class="mpanel-title"><span><span data-l="en">Salads</span><span data-l="es">Ensaladas</span></span></h3>
+<div class="mgroup">
+<ul class="mlist">
+<li><div class="mname"><b><span data-l="en">Caesar Salad</span><span data-l="es">Ensalada César</span></b></div><p data-l="en">Romaine lettuce, Parmesan, croutons, and house-made Caesar dressing.</p><p data-l="es">Lechuga romana, parmesano, crutones y aderezo César casero.</p></li>
+<li><div class="mname"><b><span data-l="en">Herencia Salad</span><span data-l="es">Ensalada Herencia</span></b></div><p data-l="en">Mixed greens, smoked salmon, tomatoes, olives, and lemon vinaigrette.</p><p data-l="es">Mix de verdes, salmón ahumado, tomate, aceitunas y vinagreta de limón.</p></li>
+<li><div class="mname"><b><span data-l="en">House Salad</span><span data-l="es">Ensalada de la casa</span></b></div><p data-l="en">Arugula, prosciutto, tomatoes, fresh mozzarella, and lemon vinaigrette.</p><p data-l="es">Rúcula, prosciutto, tomate, mozzarella fresca y vinagreta de limón.</p></li>
+<li><div class="mname"><b><span data-l="en">Buenos Aires Salad</span><span data-l="es">Ensalada Buenos Aires</span></b></div><p data-l="en">Mixed greens, grilled chicken, blue cheese, avocado, hard-boiled egg, and lemon vinaigrette.</p><p data-l="es">Mix de verdes, pollo grillado, queso azul, palta, huevo duro y vinagreta de limón.</p></li>
+<li><div class="mname"><b><span data-l="en">Pampa Steak Salad</span><span data-l="es">Ensalada Pampa</span></b></div><p data-l="en">Mixed greens, grilled skirt steak, tomatoes, caramelized onions, and chimichurri vinaigrette.</p><p data-l="es">Mix de verdes, entraña a la parrilla, tomate, cebolla caramelizada y vinagreta de chimichurri.</p></li>
+</ul>
+<p class="mnote"><span data-l="en">Add a protein: grilled chicken, salmon or skirt steak.</span><span data-l="es">Agregale proteína: pollo grillado, salmón o entraña.</span></p>
+</div>
+</div>
+<div class="mpanel" role="tabpanel" id="mp-pastas" aria-labelledby="mt-pastas">
+<h3 class="mpanel-title"><span>Pastas</span></h3>
+<div class="mgroup">
+<ul class="mlist">
+<li><div class="mname"><b><span data-l="en">Ham &amp; Cheese Sorrentinos</span><span data-l="es">Sorrentinos de jamón y queso</span></b></div><p data-l="en">Ham-and-cheese sorrentinos served with Bolognese sauce.</p><p data-l="es">Sorrentinos de jamón y queso con salsa boloñesa.</p></li>
+<li><div class="mname"><b><span data-l="en">Four-Cheese Ravioli</span><span data-l="es">Ravioles cuatro quesos</span></b></div><p data-l="en">Four-cheese ravioli served with pomodoro sauce.</p><p data-l="es">Ravioles de cuatro quesos con salsa pomodoro.</p></li>
+<li><div class="mname"><b><span data-l="en">Penne alla Vodka</span><span data-l="es">Penne alla vodka</span></b></div><p data-l="en">Penne tossed in a creamy tomato-vodka sauce.</p><p data-l="es">Penne en salsa cremosa de tomate y vodka.</p></li>
+<li><div class="mname"><b><span data-l="en">Potato Gnocchi</span><span data-l="es">Ñoquis de papa</span></b></div><p data-l="en">Potato gnocchi served with basil pesto and Parmesan.</p><p data-l="es">Ñoquis de papa con pesto de albahaca y parmesano.</p></li>
+<li><div class="mname"><b>Spaghetti</b></div><p data-l="en">Choice of pomodoro, Bolognese, or butter.</p><p data-l="es">Con pomodoro, boloñesa o manteca.</p></li>
+<li><div class="mname"><b><span data-l="en">Side of Pasta</span><span data-l="es">Porción de pasta</span></b></div><p data-l="en">A smaller portion of pasta with your choice of available sauce.</p><p data-l="es">Una porción más chica, con la salsa que elijas.</p></li>
+<li><div class="mname"><b><span data-l="en">Shrimp Scampi</span><span data-l="es">Camarones scampi</span></b></div><p data-l="en">Shrimp sautéed with garlic, butter, white wine, parsley, and pasta.</p><p data-l="es">Camarones salteados con ajo, manteca, vino blanco y perejil, con pasta.</p></li>
+</ul>
+</div>
+</div>
+<div class="mpanel" role="tabpanel" id="mp-milanesas" aria-labelledby="mt-milanesas">
+<h3 class="mpanel-title"><span>Milanesas</span></h3>
+<div class="mgroup">
+<ul class="mlist">
+<li><div class="mname"><b>Napolitana</b></div><p data-l="en">Breaded beef or chicken cutlet with pomodoro, ham, and mozzarella.</p><p data-l="es">Milanesa de carne o pollo con pomodoro, jamón y mozzarella.</p></li>
+<li><div class="mname"><b><span data-l="en">A Caballo</span><span data-l="es">A caballo</span></b></div><p data-l="en">Breaded beef or chicken cutlet topped with two fried eggs.</p><p data-l="es">Milanesa de carne o pollo con dos huevos fritos.</p></li>
+<li><div class="mname"><b>Diavola</b></div><p data-l="en">Breaded beef or chicken cutlet with spicy pomodoro and mozzarella.</p><p data-l="es">Milanesa de carne o pollo con pomodoro picante y mozzarella.</p></li>
+<li><div class="mname"><b>Herencia</b></div><p data-l="en">Breaded beef or chicken cutlet with cheddar and caramelized onions.</p><p data-l="es">Milanesa de carne o pollo con cheddar y cebolla caramelizada.</p></li>
+</ul>
+<p class="mnote"><span data-l="en">Served with one side of your choice.</span><span data-l="es">Con una guarnición a elección.</span></p>
+</div>
+</div>
+<div class="mpanel" role="tabpanel" id="mp-sandwiches" aria-labelledby="mt-sandwiches">
+<h3 class="mpanel-title"><span><span data-l="en">Sandwiches</span><span data-l="es">Sándwiches</span></span></h3>
+<div class="mgroup">
+<ul class="mlist">
+<li><div class="mname"><b>Choripán</b></div><p data-l="en">Argentine chorizo, toasted bread, and chimichurri.</p><p data-l="es">Chorizo argentino en pan tostado con chimichurri.</p></li>
+<li><div class="mname"><b><span data-l="en">Milanesa Sandwich</span><span data-l="es">Sándwich de milanesa</span></b></div><p data-l="en">Breaded beef cutlet with ham, cheese, lettuce, tomato, and mayonnaise.</p><p data-l="es">Milanesa de carne con jamón, queso, lechuga, tomate y mayonesa.</p></li>
+<li><div class="mname"><b><span data-l="en">Grilled Chicken Sandwich</span><span data-l="es">Sándwich de pollo grillado</span></b></div><p data-l="en">Grilled chicken breast with lettuce, tomato, and house-made aioli.</p><p data-l="es">Pechuga grillada con lechuga, tomate y alioli casero.</p></li>
+<li><div class="mname"><b><span data-l="en">Country Sandwich</span><span data-l="es">Sándwich de campo</span></b></div><p data-l="en">Prosciutto, arugula, sun-dried tomatoes, and extra-virgin olive oil.</p><p data-l="es">Prosciutto, rúcula, tomates secos y aceite de oliva extra virgen.</p></li>
+<li><div class="mname"><b>Churrasquito</b></div><p data-l="en">Grilled beef with ham, cheese, and chimichurri on toasted bread.</p><p data-l="es">Carne a la parrilla con jamón, queso y chimichurri en pan tostado.</p></li>
+</ul>
+</div>
+</div>
+<div class="mpanel" role="tabpanel" id="mp-sides" aria-labelledby="mt-sides">
+<h3 class="mpanel-title"><span><span data-l="en">Sides &amp; kids</span><span data-l="es">Guarniciones y niños</span></span></h3>
+<div class="mgroup">
+<h4><span data-l="en">Sides</span><span data-l="es">Guarniciones</span></h4>
+<ul class="mlist mlist-compact">
+<li><div class="mname"><b><span data-l="en">French Fries</span><span data-l="es">Papas fritas</span></b></div></li>
+<li><div class="mname"><b><span data-l="en">Truffle Parmesan Fries</span><span data-l="es">Papas fritas con trufa y parmesano</span></b></div></li>
+<li><div class="mname"><b><span data-l="en">Side of Pasta</span><span data-l="es">Porción de pasta</span></b></div></li>
+<li><div class="mname"><b><span data-l="en">Creamy Mashed Potatoes</span><span data-l="es">Puré de papas</span></b></div></li>
+<li><div class="mname"><b><span data-l="en">Mixed Green Salad</span><span data-l="es">Ensalada de verdes</span></b></div></li>
+<li><div class="mname"><b><span data-l="en">Caesar Salad</span><span data-l="es">Ensalada César</span></b></div></li>
+<li><div class="mname"><b><span data-l="en">Grilled Broccoli</span><span data-l="es">Brócoli grillado</span></b></div></li>
+<li><div class="mname"><b><span data-l="en">Grilled Asparagus</span><span data-l="es">Espárragos grillados</span></b></div></li>
+</ul>
+</div>
+<div class="mgroup">
+<h4><span data-l="en">Kids menu · 12 &amp; under</span><span data-l="es">Menú infantil · hasta 12 años</span></h4>
+<ul class="mlist">
+<li><div class="mname"><b><span data-l="en">Kids Spaghetti</span><span data-l="es">Spaghetti infantil</span></b></div><p data-l="en">Pomodoro sauce or butter.</p><p data-l="es">Con pomodoro o manteca.</p></li>
+<li><div class="mname"><b><span data-l="en">Kids Milanesa</span><span data-l="es">Milanesa infantil</span></b></div><p data-l="en">A smaller beef or chicken cutlet served with French fries or mashed potatoes.</p><p data-l="es">Milanesa chica de carne o pollo con papas fritas o puré.</p></li>
+</ul>
+</div>
+</div>
+<div class="mpanel" role="tabpanel" id="mp-desserts" aria-labelledby="mt-desserts">
+<h3 class="mpanel-title"><span><span data-l="en">Desserts</span><span data-l="es">Postres</span></span></h3>
+<div class="mgroup">
+<ul class="mlist">
+<li><div class="mname"><b><span data-l="en">Chocolate Lava Cake</span><span data-l="es">Volcán de chocolate</span></b></div><p data-l="en">Warm chocolate cake with a molten center and vanilla ice cream.</p><p data-l="es">Torta tibia de chocolate con centro fundido y helado de vainilla.</p></li>
+<li><div class="mname"><b><span data-l="en">Dulce de Leche Crepes</span><span data-l="es">Panqueques con dulce de leche</span></b></div><p data-l="en">Warm crepes filled with dulce de leche and finished with caramelized sugar.</p><p data-l="es">Panqueques tibios rellenos de dulce de leche, con azúcar caramelizada.</p></li>
+<li><div class="mname"><b><span data-l="en">Homemade Flan</span><span data-l="es">Flan casero</span></b></div><p data-l="en">Traditional caramel flan served with dulce de leche or whipped cream.</p><p data-l="es">Flan casero de caramelo con dulce de leche o crema.</p></li>
+<li><div class="mname"><b><span data-l="en">Crème Brûlée</span><span data-l="es">Crème brûlée</span></b></div><p data-l="en">Vanilla custard with a crisp caramelized sugar crust.</p><p data-l="es">Crema de vainilla con costra crocante de azúcar caramelizada.</p></li>
+<li><div class="mname"><b><span data-l="en">Ice Cream</span><span data-l="es">Helado</span></b></div><p data-l="en">A choice of available flavors, served by the scoop.</p><p data-l="es">Sabores del día, por bocha.</p></li>
+</ul>
+</div>
+</div>
   </div>
   <div class="menu-foot">
-    <span data-l="en">A preview. The full menu and prices are in the PDF.</span>
-    <span data-l="es">Un adelanto. El menú completo con precios está en el PDF.</span>
-    <a class="btn btn-ghost" href="https://drive.google.com/file/d/19A38Ir77I2mH-q8H8yBMHRtL38Fp3jJO/view"><span data-l="en">Full menu</span><span data-l="es">Menú completo</span></a>
+    <span data-l="en">Have an allergy? Let us know when you book and we'll take care of it.</span>
+    <span data-l="es">¿Tenés alguna alergia? Avisanos al reservar y lo tenemos en cuenta.</span>
+    <a class="btn btn-solid" href="#reserve"><span data-l="en">Book a table</span><span data-l="es">Reservá tu mesa</span></a>
   </div>
 </div></section>
 
@@ -440,6 +588,18 @@ html[lang="es"] [data-l="en"]{display:none}
       err.textContent=es()?'No se pudo enviar. Probá de nuevo o escribinos por Instagram.':'Could not send. Please try again or message us on Instagram.'; err.hidden=false;
     });
   });
+})();
+</script>
+<script>
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('.mtabs [role="tab"]')); if(!tabs.length) return;
+  document.documentElement.classList.add('js-menu');
+  function show(t,focus){tabs.forEach(function(b){var on=b===t;b.setAttribute('aria-selected',on);b.tabIndex=on?0:-1;document.getElementById(b.getAttribute('aria-controls')).hidden=!on;});if(focus)t.focus();}
+  tabs.forEach(function(b,i){
+    b.addEventListener('click',function(){show(b)});
+    b.addEventListener('keydown',function(e){var k=e.key,j=k==='ArrowRight'?i+1:k==='ArrowLeft'?i-1:-9;if(j===-9)return;e.preventDefault();show(tabs[(j+tabs.length)%tabs.length],true);});
+  });
+  show(tabs[0]);
 })();
 </script>
 </body>
