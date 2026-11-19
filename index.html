@@ -549,6 +549,53 @@ html[lang="es"] [data-l="en"]{display:none}
     </div>
   </div>
 </div></section>
+<section id="reviews"><div class="wrap" style="text-align:center">
+  <style>
+  #reviews .rv{position:relative;max-width:760px;margin:0 auto;min-height:260px;display:grid}
+  #reviews .rv-slide{grid-area:1/1;margin:0;display:grid;gap:18px;align-content:center;opacity:0;transform:translateY(8px);transition:opacity .6s,transform .6s;pointer-events:none}
+  #reviews .rv-slide.on{opacity:1;transform:none;pointer-events:auto}
+  #reviews .rv-stars{color:var(--gold);font-size:22px;letter-spacing:.2em}
+  #reviews blockquote{margin:0;font-family:var(--serif);font-style:italic;font-size:clamp(22px,2.8vw,30px);line-height:1.4;color:var(--ink)}
+  #reviews figcaption{color:var(--muted);font-size:14px;letter-spacing:.08em}
+  #reviews .rv-dots{display:flex;gap:8px;justify-content:center;margin-top:28px}
+  #reviews .rv-dots button{width:9px;height:9px;border-radius:50%;border:0;padding:0;background:var(--line);cursor:pointer}
+  #reviews .rv-dots button[aria-current="true"]{background:var(--gold)}
+  html:not(.js-rv) #reviews .rv-slide{position:static;opacity:1;transform:none;margin-bottom:32px}
+  html:not(.js-rv) #reviews .rv{display:block}
+  @media (prefers-reduced-motion:reduce){#reviews .rv-slide{transition:none}}
+  </style>
+  <div class="head">
+    <span class="eyebrow"><span data-l="en">What our guests say</span><span data-l="es">Lo que dicen nuestros clientes</span></span>
+    <h2><span data-l="en">Five stars on Google</span><span data-l="es">Cinco estrellas en Google</span></h2>
+  </div>
+  <div class="rv" id="rv" aria-live="polite">
+      <figure class="rv-slide"><div class="rv-stars" aria-label="5 stars">★★★★★</div><blockquote>“Me encantó todo!!! El lugar es hermoso, la comida estuvo increíble! y el servicio excelente! Tiene un ambiente súper lindo y elegante, pero a la vez acogedor. Definitivamente vamos a regresar!”</blockquote><figcaption>Kelysmar R. · Google</figcaption></figure>
+      <figure class="rv-slide" aria-hidden="true"><div class="rv-stars" aria-label="5 stars">★★★★★</div><blockquote>“Great place to eat real Argentinian dishes. The ambiance is amazing, the service is 10 out of 10 and the quality of food is outstanding.”</blockquote><figcaption>Pilar M. · Google</figcaption></figure>
+      <figure class="rv-slide" aria-hidden="true"><div class="rv-stars" aria-label="5 stars">★★★★★</div><blockquote>“Una cosa más rica que la otra. Mucho lugar para estacionar. Ambiente relajado y elegante. Ideal para ir en familia en pareja o con amigos. El barrio necesitaba algo así.”</blockquote><figcaption>Lisandro L. · Google</figcaption></figure>
+      <figure class="rv-slide" aria-hidden="true"><div class="rv-stars" aria-label="5 stars">★★★★★</div><blockquote>“Great food and atmosphere! The staff is super friendly. Loved the outside skirt steak and can’t wait to come back to try their desserts. Glad we have such a great dining option around us!”</blockquote><figcaption>Marcel M. · Google</figcaption></figure>
+      <figure class="rv-slide" aria-hidden="true"><div class="rv-stars" aria-label="5 stars">★★★★★</div><blockquote>“I ordered the Vacío (Flap Steak), and it was my first time trying this cut. The meat was perfectly cooked, tender, juicy, and packed with flavor.”</blockquote><figcaption>Leslie F. · Google</figcaption></figure>
+      <figure class="rv-slide" aria-hidden="true"><div class="rv-stars" aria-label="5 stars">★★★★★</div><blockquote>“Great Argentinian restaurant and true to our country! The service is amazing, Very authentic and abundant plates!”</blockquote><figcaption>Julieta S. · Google</figcaption></figure>
+      <figure class="rv-slide" aria-hidden="true"><div class="rv-stars" aria-label="5 stars">★★★★★</div><blockquote>“Absolutely delicious food. Parillada was great, milanesa delicious. The service was wonderful.”</blockquote><figcaption>Andrea S. · Google</figcaption></figure>
+      <figure class="rv-slide" aria-hidden="true"><div class="rv-stars" aria-label="5 stars">★★★★★</div><blockquote>“5 STARS!!! enough said. Food was delicious, and the portions were plenty. I highly recommend this restaurant.”</blockquote><figcaption>Eleanor S. · Google</figcaption></figure>
+  </div>
+  <div class="rv-dots" id="rv-dots"></div>
+  <div class="cta-row" style="margin-top:32px">
+    <a class="btn btn-ghost" href="https://www.google.com/maps/search/?api=1&query=Herencia+Argentina+Steakhouse+Coral+Springs" target="_blank" rel="noopener"><span data-l="en">Read all reviews</span><span data-l="es">Ver todas las reseñas</span></a>
+    <a class="btn btn-solid" href="https://g.page/r/CY5mD4NB5OSrEBM/review" target="_blank" rel="noopener"><span data-l="en">Leave a review</span><span data-l="es">Dejanos tu reseña</span></a>
+  </div>
+  <script>
+  (function(){
+    var box=document.getElementById('rv'); if(!box) return;
+    var s=[].slice.call(box.querySelectorAll('.rv-slide')), dots=document.getElementById('rv-dots'), i=0, t=null;
+    document.documentElement.classList.add('js-rv');
+    s.forEach(function(_,k){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Review '+(k+1));b.onclick=function(){go(k);restart();};dots.appendChild(b);});
+    function go(k){s[i].classList.remove('on');s[i].setAttribute('aria-hidden','true');dots.children[i].removeAttribute('aria-current');i=(k+s.length)%s.length;s[i].classList.add('on');s[i].removeAttribute('aria-hidden');dots.children[i].setAttribute('aria-current','true');}
+    function restart(){clearInterval(t);t=setInterval(function(){go(i+1)},6000);}
+    box.addEventListener('mouseenter',function(){clearInterval(t)}); box.addEventListener('mouseleave',restart);
+    go(0); restart();
+  })();
+  </script>
+</div></section>
 <section id="follow"><div class="wrap" style="text-align:center">
   <div class="head">
     <span class="eyebrow"><span data-l="en">Follow us</span><span data-l="es">Seguinos</span></span>
