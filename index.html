@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Herencia Argentina Steakhouse</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Argentine steakhouse in Coral Springs, Florida. Parrilla, empanadas and Argentine wine. Reopening November 26 under new ownership.">
+<meta name="description" content="Argentine steakhouse in Coral Springs, Florida. Parrilla, empanadas and Argentine wine. Reopening November 30 under new ownership.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Figtree:wght@400;500;600&display=swap">
 <style>
@@ -196,8 +196,8 @@ html[lang="es"] [data-l="en"]{display:none}
 <body>
 
 <div class="notice"><div class="wrap">
-  <span data-l="en">New ownership · Grand reopening Thursday, November 26</span>
-  <span data-l="es">Nuevos dueños · Gran reapertura el jueves 26 de noviembre</span>
+  <span data-l="en">New ownership · Grand reopening Monday, November 30 · 11 AM</span>
+  <span data-l="es">Nuevos dueños · Gran reapertura el lunes 30 de noviembre · 11 h</span>
 </div></div>
 
 <header class="nav"><div class="wrap">
@@ -224,8 +224,8 @@ html[lang="es"] [data-l="en"]{display:none}
   <div class="wrap">
     <h1>HERENCIA<span class="sub">ARGENTINA</span><span class="rule">STEAKHOUSE</span></h1>
     <p class="lede">
-      <span data-l="en">The Argentine parrilla of Coral Springs, lit again. A new chapter begins November 26.</span>
-      <span data-l="es">La parrilla argentina de Coral Springs vuelve a encenderse. Un nuevo capítulo empieza el 26 de noviembre.</span>
+      <span data-l="en">The Argentine parrilla of Coral Springs, lit again. A new chapter begins November 30.</span>
+      <span data-l="es">La parrilla argentina de Coral Springs vuelve a encenderse. Un nuevo capítulo empieza el 30 de noviembre.</span>
     </p>
     <div class="countdown" id="countdown" aria-live="polite">
       <div><b id="cd-d">14</b><small data-l="en">Days</small><small data-l="es">Días</small></div>
@@ -281,8 +281,8 @@ html[lang="es"] [data-l="en"]{display:none}
     <p class="quote">El sabor de la Argentina, <em>para compartir en cada encuentro.</em></p>
     <p data-l="en">That line is painted on our wall, and it's still the idea. Herencia reopens under <strong>new ownership</strong>: an Argentine table where the asado takes its time, the empanadas come out of the kitchen hot, and the wine is Malbec.</p>
     <p data-l="es">Esa frase está en nuestra pared y sigue siendo la idea. Herencia reabre con <strong>nuevos dueños</strong>: una mesa argentina donde el asado se toma su tiempo, las empanadas salen calentitas de la cocina y el vino es Malbec.</p>
-    <p data-l="en">Come by on November 26, say hello, and tell us what you'd like to see on the table.</p>
-    <p data-l="es">Vení el 26 de noviembre, saludanos y contanos qué te gustaría encontrar en la mesa.</p>
+    <p data-l="en">Come by on November 30, say hello, and tell us what you'd like to see on the table.</p>
+    <p data-l="es">Vení el 30 de noviembre, saludanos y contanos qué te gustaría encontrar en la mesa.</p>
   </div>
 </div></section>
 
@@ -628,8 +628,8 @@ html[lang="es"] [data-l="en"]{display:none}
   var saved=null; try{saved=localStorage.getItem('herencia-lang')}catch(e){}
   setLang(saved||((navigator.language||'').toLowerCase().indexOf('es')===0?'es':'en'));
 
-  // Countdown to Nov 26 2026, 11 AM Eastern (opening hour)
-  var target=Date.UTC(2026,10,26,16,0,0);
+  // Countdown to Nov 30 2026, 11 AM Eastern (opening hour)
+  var target=Date.UTC(2026,10,30,16,0,0);
   function pad(n){return String(n).padStart(2,'0')}
   function tick(){
     var ms=target-Date.now(), box=document.getElementById('countdown');
@@ -655,9 +655,9 @@ html[lang="es"] [data-l="en"]{display:none}
   var f=document.getElementById('res-form'); if(!f) return;
   var $=function(id){return document.getElementById(id)};
   var es=function(){return document.documentElement.lang==='es'};
-  // Date: no earlier than reopening (Nov 26, 2026) or today
+  // Date: no earlier than reopening (Nov 30, 2026) or today
   var d=new Date(), today=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
-  var min=today<'2026-11-26'?'2026-11-26':today; $('res-date').min=min; $('res-date').value=min;
+  var min=today<'2026-11-30'?'2026-11-30':today; $('res-date').min=min; $('res-date').value=min;
   // Time: every 30 min, 11:00 to 22:00
   var t=$('res-time');
   for(var h=11;h<=22;h++){for(var m=0;m<60;m+=30){if(h===22&&m>0)break;
@@ -713,7 +713,7 @@ html[lang="es"] [data-l="en"]{display:none}
     if(on){panel.scrollIntoView({behavior:'smooth',block:'start'}); setTimeout(function(){$('ev-type').focus({preventScroll:true})},400);}
   });
   var d=new Date(), today=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
-  $('ev-date').min=today<'2026-11-26'?'2026-11-26':today;
+  $('ev-date').min=today<'2026-11-30'?'2026-11-30':today;
   // Occasion labels follow the EN/ES toggle
   function lab(){[].forEach.call($('ev-type').options,function(o){if(!o.dataset.es)o.dataset.es=o.textContent;o.textContent=es()?o.dataset.es:o.dataset.en;});}
   lab(); new MutationObserver(lab).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
