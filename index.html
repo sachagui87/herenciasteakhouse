@@ -190,6 +190,10 @@ html[lang="es"] [data-l="en"]{display:none}
 .res-msg h3{font-size:26px;color:var(--gold);margin-bottom:8px}
 .res-msg p{color:var(--muted)}
 .res-err{color:#f0a89a;font-size:14px;margin-top:12px}
+.res-ot{display:flex;flex-direction:column;align-items:center;gap:16px}
+.res-ot iframe{max-width:100%}
+.res-ot-note{color:var(--muted);font-size:13px;text-align:center}
+.res-ot-note a{color:var(--gold)}
 @media (max-width:640px){.res-card{padding:20px}.res-row3,.res-row3.res-eq{grid-template-columns:1fr}}
 </style>
 </head>
@@ -244,32 +248,9 @@ html[lang="es"] [data-l="en"]{display:none}
     <p class="eyebrow"><span data-l="en">Reservations</span><span data-l="es">Reservas</span></p>
     <h2><span data-l="en">Book a table</span><span data-l="es">Reservá tu mesa</span></h2>
   </div>
-  <div class="res-card">
-    <form id="res-form" novalidate>
-      <div class="res-grid">
-        <div class="full res-row3">
-          <div class="res-field"><label for="res-date"><span data-l="en">Date</span><span data-l="es">Fecha</span></label><input id="res-date" type="date" required></div>
-          <div class="res-field"><label for="res-time"><span data-l="en">Time</span><span data-l="es">Hora</span></label><select id="res-time" required></select></div>
-          <div class="res-field"><label for="res-party"><span data-l="en">Guests</span><span data-l="es">Personas</span></label><select id="res-party" required></select></div>
-        </div>
-        <div class="full res-row3 res-eq">
-          <div class="res-field"><label for="res-name"><span data-l="en">Name</span><span data-l="es">Nombre</span></label><input id="res-name" type="text" autocomplete="name" required></div>
-          <div class="res-field"><label for="res-phone"><span data-l="en">Phone</span><span data-l="es">Teléfono</span></label><input id="res-phone" type="tel" autocomplete="tel" required></div>
-          <div class="res-field"><label for="res-email">Email</label><input id="res-email" type="email" autocomplete="email" required></div>
-        </div>
-        <div class="res-field full"><label for="res-notes"><span data-l="en">Notes — allergies, birthdays (optional)</span><span data-l="es">Notas — alergias, cumpleaños (opcional)</span></label><input id="res-notes" type="text"></div>
-        <div class="res-hp" aria-hidden="true"><input id="res-hp" type="text" tabindex="-1" autocomplete="off"></div>
-      </div>
-      <div class="res-foot">
-        <small><span data-l="en">We'll confirm your table shortly.</span><span data-l="es">Te confirmamos la mesa a la brevedad.</span></small>
-        <button class="btn btn-solid" type="submit" id="res-submit"><span data-l="en">Request booking</span><span data-l="es">Pedir reserva</span></button>
-      </div>
-      <p class="res-err" id="res-err" hidden></p>
-    </form>
-    <div class="res-msg" id="res-ok" hidden>
-      <h3><span data-l="en">Thank you!</span><span data-l="es">¡Gracias!</span></h3>
-      <p><span data-l="en">We received your request and will confirm your table shortly.</span><span data-l="es">Recibimos tu pedido y te confirmamos la mesa a la brevedad.</span></p>
-    </div>
+  <div class="res-card res-ot">
+    <script type="text/javascript" src="//www.opentable.com/widget/reservation/loader?rid=1549309&type=wide&theme=wide&color=1&dark=true&iframe=true&domain=com&lang=en-US&newtab=false&ot_source=Restaurant%20website&cfe=true"></script>
+    <p class="res-ot-note"><span data-l="en">Parties over 10 or private events: <a href="#events">contact us</a>.</span><span data-l="es">Más de 10 personas o eventos privados: <a href="#events">escribinos</a>.</span></p>
   </div>
 </div></section>
 
@@ -648,48 +629,6 @@ html[lang="es"] [data-l="en"]{display:none}
     var idx=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].indexOf(wd);
     document.querySelectorAll('#hours li').forEach(function(li){if(li.dataset.days.split(',').indexOf(String(idx))>-1)li.classList.add('today')});
   }catch(e){}
-})();
-</script>
-<script>
-(function(){
-  var FORM='https://docs.google.com/forms/d/e/1FAIpQLSddYTUc4MDcHXGjFooPoqgsYd1qExQPBRkMsYSHL3Zl_6M7NA/formResponse';
-  var E={name:'entry.595308941',phone:'entry.848090172',email:'entry.887531698',date:'entry.1033526850',time:'entry.2141523830',party:'entry.2033204145',notes:'entry.1683092034'};
-  var f=document.getElementById('res-form'); if(!f) return;
-  var $=function(id){return document.getElementById(id)};
-  var es=function(){return document.documentElement.lang==='es'};
-  // Date: no earlier than reopening (Nov 30, 2026) or today
-  var d=new Date(), today=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
-  var min=today<'2026-11-30'?'2026-11-30':today; $('res-date').min=min; $('res-date').value=min;
-  // Time: every 30 min, 11:00 to 22:00
-  var t=$('res-time');
-  for(var h=11;h<=22;h++){for(var m=0;m<60;m+=30){if(h===22&&m>0)break;
-    var v=String(h).padStart(2,'0')+':'+String(m).padStart(2,'0');
-    var lab=((h%12)||12)+':'+String(m).padStart(2,'0')+(h<12?' AM':' PM');
-    t.add(new Option(lab,v,false,v==='19:00'));}}
-  // Party size (values must match the Google Form choices)
-  var p=$('res-party');
-  for(var n=1;n<=10;n++)p.add(new Option(String(n),String(n),false,n===2));
-  p.add(new Option('10+','Más de 10 / More than 10'));
-  f.addEventListener('submit',function(ev){
-    ev.preventDefault();
-    var err=$('res-err'); err.hidden=true;
-    if($('res-hp').value) return;
-    var name=$('res-name').value.trim(), phone=$('res-phone').value.trim(), date=$('res-date').value, email=$('res-email').value.trim();
-    if(!name||!phone||!date||!email){err.textContent=es()?'Completá fecha, nombre, teléfono y email.':'Please fill in date, name, phone and email.';err.hidden=false;return;}
-    if(!/^\S+@\S+\.\S+$/.test(email)){err.textContent=es()?'Revisá el email.':'Please check the email.';err.hidden=false;return;}
-    var ds=date.split('-'), ts=t.value.split(':'), b=new URLSearchParams();
-    b.append(E.name,name); b.append(E.phone,phone); if(email)b.append(E.email,email);
-    b.append(E.date+'_year',ds[0]); b.append(E.date+'_month',String(+ds[1])); b.append(E.date+'_day',String(+ds[2]));
-    b.append(E.time+'_hour',ts[0]); b.append(E.time+'_minute',ts[1]);
-    b.append(E.party,p.value); var notes=$('res-notes').value.trim(); if(notes)b.append(E.notes,notes);
-    var btn=$('res-submit'); btn.disabled=true; btn.style.opacity=.6;
-    fetch(FORM,{method:'POST',mode:'no-cors',body:b}).then(function(){
-      f.hidden=true; $('res-ok').hidden=false;
-    }).catch(function(){
-      btn.disabled=false; btn.style.opacity='';
-      err.textContent=es()?'No se pudo enviar. Probá de nuevo o escribinos por WhatsApp al (954) 573-9212.':'Could not send. Please try again or message us on WhatsApp at (954) 573-9212.'; err.hidden=false;
-    });
-  });
 })();
 </script>
 <script>
